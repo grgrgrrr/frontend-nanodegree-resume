@@ -8,12 +8,16 @@ var work = {
             {
                 "city": "Rostov",
                 "role": "Developer",
-                "employer": "sva"
+                "employer": "sva",
+                "date" : "03.2016",
+                "description" : "Learning javascript and being cool"
             }  ,
             {
                 "city": "Rostov",
                 "role": "Teacher",
-                "employer": "sfedu"
+                "employer": "sfedu",
+                "date" : "07.2015",
+                "description" : "Trying to teach little humans"
             }
         ]
 }
@@ -88,8 +92,13 @@ for (var item in work["jobs"] )
     var formatEmployer = HTMLworkEmployer.replace("%data%",  work.jobs[item].employer);
     var concat = formatEmployer + formatTitle;
     $(".work-entry:last").append(concat);
-}
 
+    var formatedDate = HTMLworkDates.replace("%data%", work.jobs[item].date);
+    $(".work-entry:last").append(formatedDate);
+
+    var formatedDescription = HTMLworkDescription.replace("%data%", work.jobs[item].description);
+    $(".work-entry:last").append(formatedDescription);
+}
 
 
 //$("#main").append(bio.name);
