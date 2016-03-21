@@ -2,6 +2,7 @@
 This is empty on purpose! Your code to build the resume will go here.
  */
 
+//work information
 var work = {
     jobs :
         [
@@ -22,84 +23,165 @@ var work = {
         ]
 }
 
+//biography information
 var bio =
 {
-    "name" : "grgrgrrr",
+    "name" : "Anna Ryndeeva",
     "role" : "developer",
     "contacts" : {
         "mobile" : "lalala",
         "country" : "Russia",
         "github" : "grgrgrrr",
         "twitter" : "grgrgrrr",
-        "e-mail" : "grgrgrrr"
+        "e-mail" : "grgrgrrr",
+        "location" : "Rostov-on-Don"
     },
     "welcome" : "hello, bro",
-    "skills" : ["awesomeness", "funny", "responsible"],
+    "skills" : ["awesomeness", "funny", "responsible", "awesomeness", "funny", "responsible"],
     "picture" : "images/fry.jpg"
 }
 
-var project =
+//project information
+var projects =
 {
-  "name" : "dressMe",
-  "data" : "2015"
+    proj: [
+        {
+            "name" : "dressMe",
+            "data" : "2015",
+            "description": "This project includes intelligent system of finding suitable dress according to a color and 2D virtual fitting room.",
+            "image": "images/space1.png"
+        }
+        ,
+        {
+            "name": "arkanoid",
+            "data": "2016",
+            "description": "Awesome game developed with using Unity3D. ",
+            "image": "images/space2.jpg"
+        }
+    ]
 }
 
+//education information
 var education =
 {
- "schools": [{
-  "name": "56",
-  "city": "Rostov"
- }, {
-  "name": "12",
-  "city": "Rostov"
- }]
+    "schools":
+            [{
+                "name": "56",
+                "city": "Rostov"
+            },
+            {
+                "name": "12",
+                "city": "Rostov"
+            }],
+    "university":
+    {
+        "title": "sfedu",
+        "degree": "bachelor",
+        "specialization": "computer science"
+    }
 }
 
 
 //adding biography
-
+var displayBio = function()
+{
     var formattedName = HTMLheaderName.replace("%data%", bio.name);
     $("#header").append(formattedName);
 
     var formatedRole = HTMLheaderRole.replace("%data%", bio.role);
     $("#header").append(formatedRole);
 
-  /*  for (var i = 0; i < bio.contacts.length; i++)
-    {
-        $("#header").append(Html);
-        var formatedTitle =
-        var formattedContact =
-    }*/
 
+    var formatedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
+    $("#header").append(formatedMobile);
+
+    var formatedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
+    $("#header").append(formatedTwitter);
+
+    var formatedEmail= HTMLemail.replace("%data%", bio.contacts["e-mail"]);
+    $("#header").append(formatedEmail);
+
+    var formatedLocation= HTMLlocation.replace("%data%", bio.contacts.location);
+    $("#header").append(formatedLocation);
+
+    var formatedImage = HTMLbioPic.replace("%data%", bio.picture);
+    $("#header").append(formatedImage);
+
+    var formatedMsg = HTMLwelcomeMsg.replace("%data%", bio.welcome);
+    $("#header").append(formatedMsg);
+
+    //$("#main").append(bio.name);
+    //$("#main").append(bio["welcome"]);
+
+
+}
+displayBio();
 
 
 //adding skills
-if (bio["skills"].length > 0)
+var displaySkills = function()
 {
-    $("#header").append(HTMLskillsStart);
-    for (var i =0; i<bio["skills"].length; i++)
+    if (bio["skills"].length > 0)
     {
-        var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
-        $("#skills").append(formattedSkill);
+        $("#header").append(HTMLskillsStart);
+        for (var i =0; i<bio["skills"].length; i++)
+        {
+            var formattedSkill = HTMLskills.replace("%data%", bio.skills[i]);
+            $("#skills").append(formattedSkill);
+        }
     }
 }
+displaySkills();
 
 //adding work experience
-for (var item in work["jobs"] )
+var displayWork = function()
 {
-    $("#workExperience").append(HTMLworkStart);
-    var formatTitle = HTMLworkTitle.replace("%data%", work.jobs[item].role);
-    var formatEmployer = HTMLworkEmployer.replace("%data%",  work.jobs[item].employer);
-    var concat = formatEmployer + formatTitle;
-    $(".work-entry:last").append(concat);
+    for (var item in work["jobs"] )
+    {
+        $("#workExperience").append(HTMLworkStart);
+        var formatTitle = HTMLworkTitle.replace("%data%", work.jobs[item].role);
+        var formatEmployer = HTMLworkEmployer.replace("%data%",  work.jobs[item].employer);
+        var concat = formatEmployer + formatTitle;
+        $(".work-entry:last").append(concat);
 
-    var formatedDate = HTMLworkDates.replace("%data%", work.jobs[item].date);
-    $(".work-entry:last").append(formatedDate);
+        var formatedDate = HTMLworkDates.replace("%data%", work.jobs[item].date);
+        $(".work-entry:last").append(formatedDate);
 
-    var formatedDescription = HTMLworkDescription.replace("%data%", work.jobs[item].description);
-    $(".work-entry:last").append(formatedDescription);
+        var formatedDescription = HTMLworkDescription.replace("%data%", work.jobs[item].description);
+        $(".work-entry:last").append(formatedDescription);
+    }
 }
+displayWork();
+
+//encapsulated display of projects
+projects.display = function()
+{
+    for (var item in projects["proj"])
+    {
+        $("#projects").append(HTMLprojectStart);
+        var formatedTitle = HTMLprojectTitle.replace("%data%", projects.proj[item].name);
+        $(".project-entry:last").append(formatedTitle);
+        var formatedData = HTMLprojectDates.replace("%data%", projects.proj[item].data);
+        $(".project-entry:last").append(formatedData);
+        var formatedDescription = HTMLprojectDescription.replace("%data%", projects.proj[item].description);
+        $(".project-entry:last").append(formatedDescription);
+        var formatedImage = HTMLprojectImage.replace("%data%", projects.proj[item].image);
+        $(".project-entry:last").append(formatedImage);
+    }
+}
+projects.display();
 
 
-//$("#main").append(bio.name);
-//$("#main").append(bio["welcome"]);
+
+//the name game
+function inName(name)
+{
+    var newName = "";
+    var names = name.trim().split(" ");
+    newName = newName + names[0][0].toUpperCase() + names[0].slice(1).toLowerCase() + " " + names[1].toUpperCase();
+    return newName;
+}
+$('#main').append(internationalizeButton);
+
+
+

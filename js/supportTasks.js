@@ -13,7 +13,6 @@ console.log(myArray);
 var name = "AlbERt EINstEiN";
 function nameChanger(oldName) {
     var finalName = oldName;
-    // Your code goes here!
     var arr = finalName.split(' ');
     var name = arr[0];
     var part = name.slice(1).toLowerCase();
@@ -21,27 +20,61 @@ function nameChanger(oldName) {
     var surname = arr[1].toUpperCase();
 
     finalName= fst + part + " " + surname;
-    // Don't delete this line!
     return finalName;
 };
 
 
 //replace all < > to "" to check harmless strings
-
 var html = '<script src="http://hackyourwebsite.com/eviljavascript.js"></script>';
 var charEscape = function(_html) {
     var newHTML = _html;
-    // How will you make sure that newHTML doesn't contain any < or > ?
-    // Your code goes here!
-
     var patternOpen = /</gi;
     var patternClose = />/gi;
     newHTML = newHTML.replace(patternOpen, "&lt;");
     newHTML = newHTML.replace(patternClose, "&gt;");
-
-    // Don't delete this line!
     return newHTML;
 };
-
-// Did your code work? The line below will tell you!
 console.log(charEscape(html));
+
+//finding locations from work obj
+var work = {
+    "jobs": [
+        {
+            "employer": "Udacity",
+            "title": "Course Developer",
+            "location": "Mountain View, CA",
+            "dates": "Feb 2014 - Current",
+            "description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
+        },
+        {
+            "employer": "LearnBIG",
+            "title": "Software Engineer",
+            "location": "Seattle, WA",
+            "dates": "May 2013 - Jan 2014",
+            "description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
+        },
+        {
+            "employer": "LEAD Academy Charter High School",
+            "title": "Science Teacher",
+            "location": "Nashville, TN",
+            "dates": "Jul 2012 - May 2013",
+            "description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
+        },
+        {
+            "employer": "Stratford High School",
+            "title": "Science Teacher",
+            "location": "Nashville, TN",
+            "dates": "Jun 2009 - Jun 2012",
+            "description": "Who moved my cheese cheesy feet cauliflower cheese. Queso taleggio when the cheese comes out everybody's happy airedale ricotta cheese and wine paneer camembert de normandie. Swiss mozzarella cheese slices feta fromage frais airedale swiss cheesecake. Hard cheese blue castello halloumi parmesan say cheese stinking bishop jarlsberg."
+        }
+    ]
+};
+
+function locationizer(work_obj) {
+    var locations = [];
+    for (var job in work_obj["jobs"])
+    {
+        locations.push(work_obj.jobs[job].location);
+    }
+    return locations;
+}
