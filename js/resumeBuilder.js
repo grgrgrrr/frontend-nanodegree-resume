@@ -29,7 +29,7 @@ var bio =
     "name" : "Anna Ryndeeva",
     "role" : "developer",
     "contacts" : {
-        "mobile" : "lalala",
+        "mobile" : "123456789",
         "country" : "Russia",
         "github" : "grgrgrrr",
         "twitter" : "grgrgrrr",
@@ -66,19 +66,46 @@ var education =
 {
     "schools":
             [{
-                "name": "56",
-                "city": "Rostov"
+                "name": "sfedu",
+                "location": "Rostov",
+                "degree": "bachelor",
+                "specialization": "computer science",
+                "dates": "2011 - 2015"
             },
             {
-                "name": "12",
-                "city": "Rostov"
+                "name": "sfedu",
+                "location": "Rostov",
+                "degree": "master",
+                "specialization": "computer science",
+                "dates": "2015 - 2017"
             }],
-    "university":
-    {
-        "title": "sfedu",
-        "degree": "bachelor",
-        "specialization": "computer science"
-    }
+    "online-courses":
+    [
+        {
+            "website": "Udacity",
+            "title": "JavaScript Basics",
+            "date": "03.2016",
+            "url": "udacity.com"
+        },
+        {
+            "website": "Coursera",
+            "title": "Introduction to R",
+            "date": "04.2016",
+            "url": "coursera.com"
+        },
+        {
+            "website": "Codacademy",
+            "title": "Python basics",
+            "date" : "11.2015",
+            "url": "codacademy.com"
+        },
+        {
+            "website": "Yandex",
+            "title": "Machine Learning. Voronzov",
+            "date": "10.2015",
+            "url": "yandex.ru"
+        }
+    ]
 }
 
 
@@ -92,17 +119,18 @@ var displayBio = function()
     $("#header").append(formatedRole);
 
 
+    $("#header").append(HTMLContactsStart);
     var formatedMobile = HTMLmobile.replace("%data%", bio.contacts.mobile);
-    $("#header").append(formatedMobile);
+    $("#contacts").append(formatedMobile);
 
     var formatedTwitter = HTMLtwitter.replace("%data%", bio.contacts.twitter);
-    $("#header").append(formatedTwitter);
+    $("#contacts").append(formatedTwitter);
 
     var formatedEmail= HTMLemail.replace("%data%", bio.contacts["e-mail"]);
-    $("#header").append(formatedEmail);
+    $("#contacts").append(formatedEmail);
 
     var formatedLocation= HTMLlocation.replace("%data%", bio.contacts.location);
-    $("#header").append(formatedLocation);
+    $("#contacts").append(formatedLocation);
 
     var formatedImage = HTMLbioPic.replace("%data%", bio.picture);
     $("#header").append(formatedImage);
@@ -165,13 +193,36 @@ projects.display = function()
         $(".project-entry:last").append(formatedData);
         var formatedDescription = HTMLprojectDescription.replace("%data%", projects.proj[item].description);
         $(".project-entry:last").append(formatedDescription);
-        var formatedImage = HTMLprojectImage.replace("%data%", projects.proj[item].image);
-        $(".project-entry:last").append(formatedImage);
+
+        for (var i = 0; i<2; i++)
+        {
+            var formatedImage = HTMLprojectImage.replace("%data%", projects.proj[item].image);
+            $(".project-entry:last").append(formatedImage);
+        }
     }
 }
 projects.display();
 
 
+education.display = function()
+{
+    for (var item in education["schools"])
+    {
+        $("#education").append(HTMLschoolStart);
+        var formatedTitle = HTMLschoolName.replace("%data%", education.schools[item].name);
+        $(".education-entry:last").append(formatedTitle);
+
+        var formatedLocation = HTMLschoolLocation.replace("%data%", education.schools[item].city);
+        $(".education-entry:last").append(formatedLocation);
+
+        var formatedDegree = HTMLschoolDegree.replace("%data%", education.schools[item].degree);
+        $(".education-entry:last").append(formatedDegree);
+
+        var formatedSpecialization = HTMLschoolMajor.replace("%data%", education.schools[item].specialization);
+        $(".education-entry:last").append(formatedSpecialization);
+    }
+}
+education.display();
 
 //the name game
 function inName(name)
@@ -182,6 +233,8 @@ function inName(name)
     return newName;
 }
 $('#main').append(internationalizeButton);
+
+$('#mapDiv').append(googleMap);
 
 
 
